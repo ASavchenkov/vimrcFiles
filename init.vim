@@ -55,6 +55,7 @@ au VimEnter * RainbowParenthesesToggle
 
 hi Comment ctermfg=LightBlue
 hi Directory ctermfg=LightBlue
+hi Search ctermfg=Black ctermbg=Yellow
 
 set whichwrap+=<,>,h,l,[,]
 

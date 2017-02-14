@@ -3,7 +3,7 @@ set nocompatible
 call plug#begin('~/.vim/plugged')
 
 Plug 'https://github.com/scrooloose/nerdtree.git'
-Plug 'https://github.com/scrooloose/syntastic.git'
+Plug 'https://github.com/neomake/neomake'
 Plug 'https://github.com/tpope/vim-dispatch.git'
 Plug 'https://github.com/tpope/vim-fugitive.git'
 Plug 'https://github.com/kien/rainbow_parentheses.vim.git'
@@ -15,7 +15,6 @@ Plug 'https://github.com/zchee/deoplete-clang.git'
 Plug 'https://github.com/davidhalter/jedi-vim.git'
 Plug 'scrooloose/nerdcommenter'
 Plug 'https://github.com/fboender/bexec.git'
-Plug 'floobits/floobits-neovim'
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
@@ -33,17 +32,27 @@ set backspace=2
 set clipboard=unnamedplus
 set mouse=a
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+let g:neomake_python_flake8_maker = {
+    \ 'args': ['--ignore=E221,E241,E272,E251,W702,E203,E201,E202',  '--format=default'],
+    \ 'errorformat':
+        \ '%E%f:%l: could not compile,%-Z%p^,' .
+        \ '%A%f:%l:%c: %t%n %m,' .
+        \ '%A%f:%l: %t%n %m,' .
+        \ '%-G%.%#',
+    \ }
+let g:neomake_python_enabled_makers = ['pyflakes'] 
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = '-std=c++11 -Wall -Wextra -Wpedantic'
+let g:neomake_warning_sign = {
+  \ 'text': 'W',
+  \ 'texthl': 'WarningMsg',
+  \ }
+let g:neomake_error_sign = {
+  \ 'text': 'E',
+  \ 'texthl': 'ErrorMsg',
+  \ }
 
+
+autocmd! BufWritePost * Neomake
 
 set noexpandtab
 set copyindent
@@ -65,4 +74,3 @@ autocmd CursorHold * exe printf('match IncSearch /\V\<%s\>/', escape(expand('<cw
 
 map <up> gk
 map <down> gj
-

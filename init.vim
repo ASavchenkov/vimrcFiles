@@ -18,8 +18,8 @@ Plug 'https://github.com/fboender/bexec.git'
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-3.9/lib/libclang.so.1"
-let g:deoplete#sources#clang#clang_header = "/usr/lib/llvm-3.9/lib/clang"
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-3.8/lib/libclang.so.1"
+let g:deoplete#sources#clang#clang_header = "/usr/lib/llvm-3.8/lib/clang"
 
 let g:jedi#completions_enabled=0
 let g:jedi#use_splits_not_buffers="winwidth"
